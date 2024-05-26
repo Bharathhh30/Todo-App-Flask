@@ -25,10 +25,13 @@
         </button>
         <div class="collapse navbar-collapse" id="navbar">
             <div class="navbar-nav">
+                {% if user.is_authenticated %}
+                <a href="/" class="nav_item nav-link" id="home">Home</a>
+                <a href="/logout" class="nav_item nav-link" id="logout">Logout</a>
+                {% else  %}
                 <a href="/login" class="nav_item nav-link" id="login">Login</a>
                 <a href="/signup" class="nav_item nav-link" id="signup">Sign Up</a>
-                <a href="/logout" class="nav_item nav-link" id="logout">Logout</a>
-                <a href="/" class="nav_item nav-link" id="home">Home</a>
+                {% endif %}
             </div>
         </div>
     </nav>
@@ -71,5 +74,6 @@
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"
     ></script>
+    <script src="{{ url_for('static', filename='index.js') }}"></script>
 </body>
 </html>

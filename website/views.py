@@ -3,6 +3,12 @@ from flask_login import login_required,current_user
 from .models import Notes
 from . import *
 import json
+import os
+from groq import Groq
+
+client = Groq(
+    api_key='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'
+)
 
 
 views = Blueprint('views',__name__)
@@ -36,3 +42,23 @@ def delete_note():
             db.session.commit()
             return jsonify({}), 200
     return jsonify({}), 400
+
+@views.route('/chatwithgroq',methods=['GET','POST'])
+@login_required
+def chat_with_groq():
+    # conetent_given=request.form.get("question")
+
+
+    # chat_completion = client.chat.completions.create(
+    #     messages=[
+    #         {
+    #             "role": "user",
+    #             "content": conetent_given,
+    #         }
+    #     ],
+    #     model="llama3-8b-8192",
+    # )
+
+    # output=chat_completion.choices[0].message.content
+    # # response_html = markdown.markdown(output)
+    return render_template('groq.html',user=current_user)

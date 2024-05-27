@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Chat With Groq{% endblock %}
+
+{% block content %}
+<form action="/chatwithgroq" method="post">
+    <h3 align="center">Chat with Groq</h3>
+
+    <div class="form-group">
+        <label for="question">User Question</label>
+        <input type="text" name="question" class="form-control" id="question" placeholder="Enter your Query">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+    <pre>{{ ans|safe }}</pre>
+{% endblock %}

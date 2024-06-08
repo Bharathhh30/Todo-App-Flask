@@ -2,6 +2,8 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from os import path
 from flask_login import LoginManager
+from flask_migrate import Migrate
+
 
 #  define and initialise a database
 db = SQLAlchemy()
@@ -15,7 +17,7 @@ def create_app():
     app.secret_key='my_secret_key'
 
     db.init_app(app) #Initilising the database for the flask "app"
-
+    migrate = Migrate(app, db)
 
     from .views import views
     from .auth import auth
@@ -35,7 +37,7 @@ def create_app():
 
     @login_manager.user_loader
     def load_user(id):
-        return User.query.get(int(id))
+        return User.query.get(id)
 
     return app
 
